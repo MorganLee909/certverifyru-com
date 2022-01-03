@@ -30,10 +30,6 @@ if(process.env.NODE_ENV === "production"){
             res.redirect(`https://${req.headers.host}${req.url}`);
         }
     });
-
-    mongooseOptions.auth = {authsource: "admin"};
-    mongooseOptions.user = "website";
-    mongooseOptions.pass = process.env.MONGODB_PASS;
 }
 
 mongoose.connect("mongodb://127.0.0.1/covidcert", mongooseOptions);
