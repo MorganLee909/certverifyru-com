@@ -24,6 +24,10 @@ let PersonSchema = new mongoose.Schema({
     internationalPassport: {
         type: String,
         required: false
+    },
+    displayNumber: {
+        type: String,
+        required: true
     }
 });
 

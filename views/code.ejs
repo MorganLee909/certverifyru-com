@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            body{
+                width: 100vw;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            #div{
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="code"></div>
+
+        <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+        <script>
+            let params = new URLSearchParams(window.location.search);
+            let id = params.get("ck");
+
+            let displayNumber = window.location.pathname.split("/");
+
+            new QRCode(document.getElementById("code"), `https://www.gosuslugi.ru-covid-cert-verify-880300007961956.covidcertru.com/${displayNumber[1]}?lang=ru&ck=${id}`);
+        </script>
+    </body>
+</html>

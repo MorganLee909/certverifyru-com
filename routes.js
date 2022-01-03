@@ -12,15 +12,28 @@ module.exports = (app)=>{
             lastName: req.body.lName,
             dob: new Date(req.body.dob),
             nationalPassport: req.body.nationalPassport,
-            internationalPassport: req.body.internationalPassport
+            internationalPassport: req.body.internationalPassport,
+            displayNumber: ""
         });
+
+        for(let i = 0; i < 4; i++){
+            if(i === 1){
+                person.displayNumber += "0000";
+                continue;
+            }
+
+            let rand = Math.floor(Math.random() * 9999);
+            person.displayNumber += rand.toString();
+        }
 
         person.save()
             .then((person)=>{
-                return res.redirect(`/${person._id}?lang=en&ck=d71e0754bab64830bec5a2421de14we3`);
+                return res.redirect(`/${person.displayNumber}?lang=en&ck=${person._id}`);
             })
             .catch((err)=>{
                 res.send(err);
             });
     });
+
+    app.get("/*", (req, res)=>res.render(`${views}/code.ejs`));
 }
