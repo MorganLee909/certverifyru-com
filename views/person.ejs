@@ -84,7 +84,7 @@
 
                   <div id="validUntil" class="small-text gray mr-4">Действует до:</div>
 
-                  <div class="small-text gray">30.04.2022</div>
+                  <div class="small-text gray"><%=expiration.getDate()%>.<%=('0' + (expiration.getMonth()+1)).slice(-2)%>.<%=expiration.getFullYear()%></div>
             </div>
             <div class="person-data person-data-attrs mt-24">
                 <div class="mb-4 person-data-wrap attr-wrap flex-disp">

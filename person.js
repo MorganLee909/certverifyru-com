@@ -28,6 +28,10 @@ let PersonSchema = new mongoose.Schema({
     displayNumber: {
         type: String,
         required: true
+    },
+    expiration: {
+        type: Date,
+        required: true
     }
 });
 

@@ -9,6 +9,9 @@ module.exports = (app)=>{
         let np = req.body.nationalPassport;
         let ip = req.body.internationalPassport;
 
+        let date = new Date();
+        date.setDate(date.getDate() + 75);
+
         let person = new Person({
             firstName: req.body.fName,
             middleName: req.body.mName,
@@ -16,7 +19,8 @@ module.exports = (app)=>{
             dob: "",
             nationalPassport: "",
             internationalPassport: "",
-            displayNumber: ""
+            displayNumber: "",
+            expiration: date
         });
 
         replaceAt = function(str, index, replacement) {
@@ -67,15 +71,23 @@ module.exports = (app)=>{
     app.get("/*", (req, res)=>{
         Person.findOne({_id: req.query.ck})
             .then((person)=>{
-                return res.render(`${views}/person.ejs`, {
+                let now = new Date();
+                now.setDate(now.getDate() + 2);
+
+                if(now > person.expiration) person.expiration.setDate(now.getDate() + 73);
+
+                res.render(`${views}/person.ejs`, {
                     firstName: person.firstName,
                     middleName: person.middleName,
                     lastName: person.lastName,
                     dob: person.dob,
                     nationalPassport: person.nationalPassport,
                     internationalPassport: person.internationalPassport,
-                    displayNumber: person.displayNumber
+                    displayNumber: person.displayNumber,
+                    expiration: person.expiration
                 });
+
+                return person.save();
             })
             .catch((err)=>{
                 console.error(err);
