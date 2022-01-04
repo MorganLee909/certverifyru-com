@@ -39,7 +39,9 @@ module.exports = (app)=>{
         person.dob = `${dob.getDate()}.${dob.getMonth()+1}.${dob.getFullYear()}`;
 
         person.nationalPassport = `${np[0]}${np[1]}** ***${np[np.length-3]}${np[np.length-2]}${np[np.length-1]}`;
-        person.internationalPassport = `${ip[0]}* ****${np[np.length-3]}${np[np.length-2]}${np[np.length-1]}`;
+        if(ip){
+            person.internationalPassport = `${ip[0]}* ****${ip[ip.length-3]}${ip[ip.length-2]}${ip[ip.length-1]}`;
+        }
 
         for(let i = 0; i < 4; i++){
             if(i === 1){
